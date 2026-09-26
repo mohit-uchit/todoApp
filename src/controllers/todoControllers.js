@@ -22,9 +22,37 @@ const getTodo = async (req, res) => {
     }
 }
 
+const getTodoById = async (req, res) => {
+    try {
+        const todo = await todoService.getTodoById(req.params.id)
+        return handleRes(res, todo)
+    } catch (error) {
+        return handleErr(res, error, error.statusCode)
+    }
+}
 
+const updateTodo = async (req, res) => {
+    try {
+        const todo = await todoService.updateTodo(req.params.id, req.body)
+        return handleRes(res, todo)
+    } catch (error) {
+        return handleErr(res, error, error.statusCode)
+    }
+}
+
+const deleteTodo = async (req, res) => {
+    try {
+        const todo = await todoService.deleteTodo(req.params.id)
+        return handleRes(res, todo)
+    } catch (error) {
+        return handleErr(res, error, error.statusCode)
+    }
+}
 
 module.exports = {
     createTodo,
-    getTodo
+    getTodo,
+    getTodoById,
+    updateTodo,
+    deleteTodo
 }
